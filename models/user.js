@@ -3,7 +3,7 @@
 const bcrypt = require("bcryptjs");
 // Creating our User model
 module.exports = function(sequelize, DataTypes) {
-  const login = sequelize.define("Login", {
+  const User = sequelize.define("User", {
     // The email cannot be null, and must be a proper email before creation
     email: {
       type: DataTypes.STRING,
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  const users = sequelize.define("User", {
+  const Members = sequelize.define("Member", {
     id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -41,7 +41,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
 
-  const workout = sequelize.define("Workout", {
+  const Workouts = sequelize.define("Workout", {
     symptom: {
       type: DataTypes.STRING,
       allowNull: false
@@ -56,17 +56,17 @@ module.exports = function(sequelize, DataTypes) {
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
-  login.prototype.validPassword = function(password) {
+  User.prototype.validPassword = function(password) {
     return bcrypt.compareSync(password, this.password);
   };
   // Hooks are automatic methods that run during various phases of the User Model lifecycle
   // In this case, before a User is created, we will automatically hash their password
-  login.addHook("beforeCreate", user => {
+  User.addHook("beforeCreate", user => {
     user.password = bcrypt.hashSync(
       user.password,
       bcrypt.genSaltSync(10),
       null
     );
   });
-  return login;
+  return User;
 };

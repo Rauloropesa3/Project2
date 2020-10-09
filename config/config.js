@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable camelcase */
 require("dotenv").config();
 
@@ -20,4 +21,5 @@ module.exports = {
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
+// eslint-disable-next-line semi
 }
