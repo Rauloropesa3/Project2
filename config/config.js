@@ -1,10 +1,12 @@
-require('dotenv').config()
+/* eslint-disable prettier/prettier */
+/* eslint-disable camelcase */
+require("dotenv").config();
 
 module.exports = {
   "development": {
     "username": process.env.DB_username,
     "password": process.env.DB_password,
-    "database": "passport_demo",
+    "database": process.env.DB_database,
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
@@ -19,4 +21,5 @@ module.exports = {
     "use_env_variable": "JAWSDB_URL",
     "dialect": "mysql"
   }
+// eslint-disable-next-line semi
 }
