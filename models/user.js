@@ -17,42 +17,10 @@ module.exports = function(sequelize, DataTypes) {
     password: {
       type: DataTypes.STRING,
       allowNull: false
-    }
-  });
-
-  const Members = sequelize.define("Member", {
-    id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      autoIncrement: true,
-      primaryKey: true
     },
-    name: {
+    pastDiagnosis:{
       type: DataTypes.STRING,
-      allowNull: false
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    symptom: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
-  });
-
-  const Workouts = sequelize.define("Workout", {
-    symptom: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    workout: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    visual: {
-      type: DataTypes.STRING,
-      allowNull: false
+      allowNull: true
     }
   });
   // Creating a custom method for our User model. This will check if an unhashed password entered by the user can be compared to the hashed password stored in our database
