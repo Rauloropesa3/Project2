@@ -26,4 +26,15 @@ module.exports = function(app) {
   app.get("/index", isAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, "../public/index.html"));
   });
+
+  app.get("/diagnosis", (req, res) => {
+    // If the user already has an account send them to the members page
+    
+    res.sendFile(path.join(__dirname, "../public/diagnosis.html"));
+  });
+  app.get("/symptoms", (req, res) => {
+    // If the user already has an account send them to the members page
+    
+    res.sendFile(path.join(__dirname, "../public/symptoms.html"));
+  });
 };

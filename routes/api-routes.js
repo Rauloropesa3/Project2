@@ -80,7 +80,7 @@ module.exports = function(app) {
     const gender = "M"; // Gender will come from user info 
 
     db.symptoms.findAll({
-      where:{gender: gender,sub_body_id: subBodyId}
+      where:{gender: gender,sub_body_id: subBodyId }
     }).then(function(sympResults) {
       res.json(sympResults);
     });
