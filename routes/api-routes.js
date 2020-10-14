@@ -4,6 +4,16 @@ const db = require("../models");
 const passport = require("../config/passport");
 
 module.exports = function(app) {
+  const getIssueObject = (issueId, symptomId)=>{
+    // call medicApi to get issues with "issueId"
+    const redFlag = "redFLag descriptions"; // Use the symptom id to to call medicApi to get the "redFlag" description 
+    return {
+      name: "issue name",
+      description: "short description from issue",
+      treatment: "treatment for this issue",
+      redFlag
+    }
+  }
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -51,4 +61,51 @@ module.exports = function(app) {
       });
     }
   });
+
+  app.get("/api/pastInjuries", (req, res)=>{
+    const userEmail = "chukwuanumba@gmail.com"; // Will come from user info 
+    db.User.findOne({where:{email: userEmail}}).then((data)=>{
+      
+      res.send(JSON.parse(data.pastDiagnosis));
+    })
+
+    
+  });
+
+  app.get("/api/symptoms/:subBodyId", (req, res)=>{
+    const subBodyId = req.params.subBodyId;
+    const gender = "M"; // Gender will come from user info 
+
+    db.symptoms.findAll({
+      where:{gender: gender,sub_body_id: subBodyId}
+    }).then(function(sympResults) {
+      res.json(sympResults);
+    });
+  }); 
+
+  app.get("/api/diagnosis/:symptomId", (req, res)=>{
+    console.log("diagnosis");
+    const symptomId = req.params.symptomId;
+    const diagnostics = [ // Call medicApi with "symptomId" to get a list a diagnosis                  
+      { name: "diagnosis1",issueId:157},
+      { name: "diagnosis2",issueId:222},
+      { name: "diagnosis3",issueId:420},
+    ];
+    if (diagnostics.length === 1){
+      const issueObj = getIssueObject (diagnostics[0].issueId, symptomId);
+      res.send({issueObj});
+      
+    }else{
+      //There are multiple diagnostics so send diagnostics for the user to choose 1 
+      res.send({diagnostics, symptomId})
+    }
+  });
+
+  app.get("/api/issues/:issueId/:symptomId", (req,res)=>{
+    console.log("description and treatment");
+    const issueId =req.params.issueId;
+    const symptomId =req.params.symptomId;
+    const issueObj = getIssueObject (issueId, symptomId);
+      res.send(issueObj)
+  })
 };
