@@ -12,8 +12,8 @@ module.exports = function(app) {
       description: "short description from issue",
       treatment: "treatment for this issue",
       redFlag
-    }
-  }
+    };
+  };
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -34,7 +34,9 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password,
       firstName: req.body.firstName,
-      lastName: req.body.lastName
+      lastName: req.body.lastName,
+      gender: req.body.gender,
+      birthYear: req.body.birthYear
     })
       .then(() => {
         res.redirect(307, "/api/login");
@@ -70,7 +72,7 @@ module.exports = function(app) {
     db.User.findOne({where:{email: userEmail}}).then((data)=>{
       
       res.send(JSON.parse(data.pastDiagnosis));
-    })
+    });
 
     
   });
@@ -81,7 +83,7 @@ module.exports = function(app) {
 
     db.symptoms.findAll({
       where:{gender: gender,sub_body_id: subBodyId }
-    }).then(function(sympResults) {
+    }).then((sympResults) => {
       res.json(sympResults);
     });
   }); 
@@ -100,7 +102,7 @@ module.exports = function(app) {
       
     }else{
       //There are multiple diagnostics so send diagnostics for the user to choose 1 
-      res.send({diagnostics, symptomId})
+      res.send({diagnostics, symptomId});
     }
   });
 
@@ -109,6 +111,6 @@ module.exports = function(app) {
     const issueId =req.params.issueId;
     const symptomId =req.params.symptomId;
     const issueObj = getIssueObject (issueId, symptomId);
-      res.send(issueObj)
-  })
+    res.send(issueObj);
+  });
 };
