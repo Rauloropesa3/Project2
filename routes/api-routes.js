@@ -2,18 +2,30 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const medicApi = require("../medicApi");
 
 module.exports = function(app) {
-  const getIssueObject = (issueId, symptomId)=>{
+  const getIssueObject = (issueId, symptomId, res)=>{
     // call medicApi to get issues with "issueId"
+    
+    medicApi(`issues/${issueId}/info`,"",(data)=>{
+      console.log(data);
+      
+      const issueObj= {
+        name:data.Name ,
+        description: data.DescriptionShort,
+        treatment: data.TreatmentDescription
+        
+      }
+      medicApi("redflag",`symptomId=${symptomId}`, (redFlag)=>{
+        issueObj.redFlag =redFlag;
+        res.send({issueObj});
+
+      })
+
+    })
     const redFlag = "redFLag descriptions"; // Use the symptom id to to call medicApi to get the "redFlag" description 
-    return {
-      name: "issue name",
-      description: "short description from issue",
-      treatment: "treatment for this issue",
-      redFlag
-    };
-  };
+
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -89,28 +101,43 @@ module.exports = function(app) {
   }); 
 
   app.get("/api/diagnosis/:symptomId", (req, res)=>{
-    console.log("diagnosis");
     const symptomId = req.params.symptomId;
-    const diagnostics = [ // Call medicApi with "symptomId" to get a list a diagnosis                  
-      { name: "diagnosis1",issueId:157},
-      { name: "diagnosis2",issueId:222},
-      { name: "diagnosis3",issueId:420},
-    ];
-    if (diagnostics.length === 1){
-      const issueObj = getIssueObject (diagnostics[0].issueId, symptomId);
-      res.send({issueObj});
+    medicApi("diagnosis",`symptoms=[${symptomId}]&gender=male&year_of_birth=1988`,(data)=>{
       
-    }else{
-      //There are multiple diagnostics so send diagnostics for the user to choose 1 
-      res.send({diagnostics, symptomId});
-    }
+      if (data.length === 1){
+        getIssueObject (data[0].issueId, symptomId,res);
+        
+      }else{
+        //There are multiple diagnostics so send diagnostics for the user to choose 1 
+        const diagnostics = data.map((item,index)=>{
+      return {
+              name:item.Issue.Name,
+              issueId:item.Issue.ID
+            }
+        })
+        res.send({diagnostics, symptomId})
+      }
+    });
+
+    // const diagnostics = [ // Call medicApi with "symptomId" to get a list a diagnosis                  
+    //   { name: "diagnosis1",issueId:157},
+    //   // { name: "diagnosis2",issueId:222},
+    //   // { name: "diagnosis3",issueId:420},
+    // ];
+    // if (diagnostics.length === 1){
+    //     const issueObj = getIssueObject (diagnostics[0].issueId, symptomId);
+    //    res.send({issueObj});
+    // }else{
+    //   res.send({diagnostics, symptomId})
+
+    // }
+    
   });
 
   app.get("/api/issues/:issueId/:symptomId", (req,res)=>{
     console.log("description and treatment");
     const issueId =req.params.issueId;
     const symptomId =req.params.symptomId;
-    const issueObj = getIssueObject (issueId, symptomId);
-    res.send(issueObj);
-  });
+     getIssueObject (issueId, symptomId,res);
+  })
 };
