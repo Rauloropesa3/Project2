@@ -7,6 +7,6 @@ module.exports = function(sequelize, DataTypes) {
         gender: DataTypes.STRING,
         sub_body_id: DataTypes.INTEGER
     
-    })
+    });
     return symptoms
-}
+};
