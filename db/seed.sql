@@ -1,6 +1,3 @@
-create database workoutBud_db;
-
-use  workoutBud_db;
 
 create table sub_body (
  id int NOT NULL AUTO_INCREMENT,

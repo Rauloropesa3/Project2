@@ -1,3 +1,3 @@
-CREATE DATABASE workoutBud_db;
+CREATE DATABASE medicBud_db;
 
-USE workoutBud_db;
+USE medicBud_db;

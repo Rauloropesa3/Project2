@@ -5,6 +5,8 @@ $(document).ready(() => {
   const passwordInput = $("input#password-input");
   const firstNameInput = $("input#firstName-input");
   const lastNameInput = $("input#lastName-input");
+  const userGender = $("input[name = 'gender']");
+  const userBirthYear = $("input#birthyear-input");
 
   // When the signup button is clicked, we validate the email and password are not blank
   signUpForm.on("submit", event => {
@@ -13,8 +15,18 @@ $(document).ready(() => {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim(),
       firstName: firstNameInput.val().trim(),
-      lastName: lastNameInput.val().trim()
+      lastName: lastNameInput.val().trim(),
+      birthYear: userBirthYear.val().trim()
     };
+
+    function radioValue() {
+      for (i = 0; i < userGender.length; i++) {
+        if (userGender[i].checked) {
+          userData.gender = userGender[i].value;
+        }
+      }
+    }
+    radioValue();
 
     if (!userData) {
       return;
@@ -24,7 +36,9 @@ $(document).ready(() => {
       userData.email,
       userData.password,
       userData.firstName,
-      userData.lastName
+      userData.lastName,
+      userData.gender,
+      userData.birthYear
     );
     emailInput.val("");
     passwordInput.val("");
@@ -34,12 +48,14 @@ $(document).ready(() => {
 
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
-  function signUpUser(email, password, firstName, lastName) {
+  function signUpUser(email, password, firstName, lastName, gender, birthYear) {
     $.post("/api/signup", {
       email: email,
       password: password,
       firstName: firstName,
-      lastName: lastName
+      lastName: lastName,
+      gender: gender,
+      birthYear: birthYear
     })
       .then(() => {
         window.location.replace("/index");

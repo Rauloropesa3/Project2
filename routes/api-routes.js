@@ -25,8 +25,7 @@ module.exports = function(app) {
 
     })
     const redFlag = "redFLag descriptions"; // Use the symptom id to to call medicApi to get the "redFlag" description 
-   
-  }
+
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -47,7 +46,9 @@ module.exports = function(app) {
       email: req.body.email,
       password: req.body.password,
       firstName: req.body.firstName,
-      lastName: req.body.lastName
+      lastName: req.body.lastName,
+      gender: req.body.gender,
+      birthYear: req.body.birthYear
     })
       .then(() => {
         res.redirect(307, "/api/login");
@@ -83,7 +84,7 @@ module.exports = function(app) {
     db.User.findOne({where:{email: userEmail}}).then((data)=>{
       
       res.send(JSON.parse(data.pastDiagnosis));
-    })
+    });
 
     
   });
@@ -94,7 +95,7 @@ module.exports = function(app) {
 
     db.symptoms.findAll({
       where:{gender: gender,sub_body_id: subBodyId }
-    }).then(function(sympResults) {
+    }).then((sympResults) => {
       res.json(sympResults);
     });
   }); 
