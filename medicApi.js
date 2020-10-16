@@ -10,8 +10,9 @@ const queryTemp = (resource, params, callBack) => {
         "method": "GET",
         "headers": {
             "x-rapidapi-host": "priaid-symptom-checker-v1.p.rapidapi.com",
-            "x-rapidapi-key": "538ca44cb2mshb349b3d9b5ae52ep188907jsncb73a8fa752c"
+            "x-rapidapi-key": "441f5fff35msh66538a1f641bd16p1624c8jsnf551a30cbe66"
         }
+        
     })
         .then((resp) => {
             if (resp.ok) {
