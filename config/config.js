@@ -5,7 +5,7 @@ require("dotenv").config();
 module.exports = {
   "development": {
     "username": "root",
-    "password": "Gcakatmac20",
+    "password": "password",
     "database": "workoutBud_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
