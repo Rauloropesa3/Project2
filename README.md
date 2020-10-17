@@ -50,13 +50,13 @@
 
   ## Credit
   
-  Michael Shepard
+  - Michael Shepard
   
-  Ralph Anumba
+  - Ralph Anumba
   
-  Raul Oropresa
+  - Raul Oropresa
   
-  Erik Gomez
+  - Erik Gomez
   
   
   
