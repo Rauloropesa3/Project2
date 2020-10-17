@@ -4,7 +4,6 @@ module.exports = function(sequelize, DataTypes) {
         sub_body_name: DataTypes.STRING
     }, {
         freezeTableName: true
-    })
+    });
     return sub_body
-}
-
+};
