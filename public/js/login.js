@@ -29,14 +29,7 @@ $(document).ready(() => {
       password: password
     })
       .then((data) => {
-        console.log(data);
-
-        setTimeout(()=>{
-          $("#appBody").load("./home-page.html");
-
-        }, 1000)
-        // window.location.replace("/index");
-        // If there's an error, log the error
+        $("#appBody").load("./home-page.html");
       })
       .catch(err => {
         console.log(err);

@@ -6,7 +6,7 @@ $(document).ready(() => {
     $.get("/api/user_data").then(data => {
         // console.log(data);
         $(".username").text(`Welcome ${data.firstName}`);
-        
+
         const pastDiagnosis = JSON.parse(data.pastDiagnosis);
         let pastHistoryLi = "";
 
@@ -14,5 +14,9 @@ $(document).ready(() => {
             pastHistoryLi += `<li style="color: #f8f9fa;font-size: 20px;">${item}</li>`;
         });
         $(".pastHistory").html(pastHistoryLi);
-})
+    });
+    $("#therapyPage").on("click", (event)=>{
+        event.preventDefault();
+        $("#appBody").load("./therapy.html")
+    })
 })
