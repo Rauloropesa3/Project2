@@ -37,4 +37,9 @@ module.exports = function(app) {
 
     res.sendFile(path.join(__dirname, "../public/symptoms.html"));
   });
+  app.get("/LandingPage", (req, res) => {
+    // If the user already has an account send them to the members page
+
+    res.sendFile(path.join(__dirname, "../public/LandingPage.html"));
+  });
 };
