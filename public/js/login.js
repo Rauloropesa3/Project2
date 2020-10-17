@@ -28,19 +28,20 @@ $(document).ready(() => {
       email: email,
       password: password
     })
-      .then(() => {
-    $("#appBody").load("./landingPage.html");
-    // window.location.replace("/index");
+      .then((data) => {
+        console.log(data);
+
+        $("#appBody").load("./landingPage.html");
+        // window.location.replace("/index");
         // If there's an error, log the error
       })
       .catch(err => {
-        // console.log(err);
+        console.log(err);
         alert("Wrong email or password. Please Try again")
       });
   }
-  $("#signup").on("click", ()=>{
+  $("#signup").on("click", (event) => {
+    event.preventDefault()
     $("#appBody").load("./signup.html");
-
-
   })
 });

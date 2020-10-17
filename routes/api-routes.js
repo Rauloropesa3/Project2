@@ -81,12 +81,12 @@ module.exports = function (app) {
       birthYear: req.body.birthYear
     })
       .then(() => {
-        // res.redirect(307, "/api/login");
-        res.json({ created: true })
+        res.redirect(307, "/api/login");
+        // res.json({ created: true })
       })
       .catch(err => {
-        // res.status(401).json(err);
-        res.json({ created: false })
+        res.status(401).json(err);
+        // res.json({ created: false })
 
       });
   });
@@ -142,23 +142,23 @@ module.exports = function (app) {
   app.get("/api/diagnosis/:symptomId", (req, res) => {
     const symptomId = req.params.symptomId;
     savePastDiagnosis(symptomId);
-    // medicApi("diagnosis", `symptoms=[${symptomId}]&gender=male&year_of_birth=1988`, 
-    //   (data) => {
+    medicApi("diagnosis", `symptoms=[${symptomId}]&gender=male&year_of_birth=1988`, 
+      (data) => {
 
-    //   if (data.length === 1) {
-    //     getIssueObject(data[0].issueId, symptomId, res);
+      if (data.length === 1) {
+        getIssueObject(data[0].issueId, symptomId, res);
 
-    //   } else {
-    //     //There are multiple diagnostics so send diagnostics for the user to choose 1 
-    //     const diagnostics = data.map((item, index) => {
-    //       return {
-    //         name: item.Issue.Name,
-    //         issueId: item.Issue.ID
-    //       }
-    //     })
-    //     res.send({ diagnostics, symptomId })
-    //   }
-    // });
+      } else {
+        //There are multiple diagnostics so send diagnostics for the user to choose 1 
+        const diagnostics = data.map((item, index) => {
+          return {
+            name: item.Issue.Name,
+            issueId: item.Issue.ID
+          }
+        })
+        res.send({ diagnostics, symptomId })
+      }
+    });
 
 
   });

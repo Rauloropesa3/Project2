@@ -57,9 +57,9 @@ $(document).ready(() => {
       gender: gender,
       birthYear: birthYear
     })
-      .then(() => {
-        // window.location.replace("/index");
-    $("#appBody").load("./login.html");
+      .then((data) => {
+        window.location.replace("/index");
+    // $("#appBody").load("./login.html");
 
         // If there's an error, handle it by throwing up a bootstrap alert
       })
@@ -70,4 +70,9 @@ $(document).ready(() => {
     $("#alert .msg").text(err.responseJSON);
     $("#alert").fadeIn(500);
   }
+
+  $("#login").on("click", (event)=>{
+    event.preventDefault()
+    $("#appBody").load("./login.html");
+  })
 });
