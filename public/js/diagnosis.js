@@ -149,7 +149,7 @@ $(document).ready(() => {
   });
 
   $("#home").on("click", () => {
-    $("#appBody").load("./landingPage.html");
+    $("#appBody").load("./home-pagehtml");
 
   })
 });

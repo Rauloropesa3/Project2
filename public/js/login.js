@@ -32,7 +32,7 @@ $(document).ready(() => {
         console.log(data);
 
         setTimeout(()=>{
-          $("#appBody").load("./landingPage.html");
+          $("#appBody").load("./home-page.html");
 
         }, 1000)
         // window.location.replace("/index");

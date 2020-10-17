@@ -2,7 +2,7 @@ let userInfo;
 $(document).ready(() => {
 
   const home = () => {
-    $("#appBody").load("./landingPage.html");
+    $("#appBody").load("./home-page.html");
   }
   const login = () => {
     $("#appBody").load("./login.html");
