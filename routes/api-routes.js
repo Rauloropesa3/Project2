@@ -81,12 +81,12 @@ module.exports = function (app) {
       birthYear: req.body.birthYear
     })
       .then(() => {
-        res.redirect(307, "/api/login");
-        // res.json({ created: true })
+        // res.redirect(307, "/api/login");
+        res.json({ created: true })
       })
       .catch(err => {
-        res.status(401).json(err);
-        // res.json({ created: false })
+        // res.status(401).json(err);
+        res.json({ created: false })
 
       });
   });
