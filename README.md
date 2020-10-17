@@ -48,4 +48,16 @@
   [Click here](https://murmuring-shore-74149.herokuapp.com/) to be directed to the application.
   ![](public/assets/medicBud.png)
 
+  ## Credit
+  
+  Michael Shepard
+  
+  Ralph Anumba
+  
+  Raul Oropresa
+  
+  Erik Gomez
+  
+  
+  
   
