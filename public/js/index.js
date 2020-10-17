@@ -1,6 +1,28 @@
+let userInfo;
 $(document).ready(() => {
-  $.get("/api/user_data").then(data => {
-    console.log(data);
-    $(".username").text(`Welcome ${data.firstName}`);
-  });
+
+  const home = () => {
+    $("#appBody").load("./landingPage.html");
+  }
+  const login = () => {
+    $("#appBody").load("./login.html");
+  }
+  const signup = () => {
+    $("#appBody").load("./signup.html");
+  }
+  const injurySelection = () => {
+    event.preventDefault()
+  $( "#appBody" ).load( "./bodyPartCarousel.html" );
+  }
+
+  if (userInfo) {
+    //Take the user to the main page 
+  } else {
+    //prompt user to login 
+    login();
+    // if user is not a member 
+    // then, prompt user to sign up 
+  }
+
+ 
 });
