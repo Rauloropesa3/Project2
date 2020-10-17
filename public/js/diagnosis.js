@@ -1,9 +1,10 @@
 $(document).ready(() => {
+
   const modalTitle = $("#modalTitle");
   const modalBody = $(".modal-body");
   const dialog = $('#symptomModal');
   let currentSymptomId = "";
- 
+
   const displayTreatment = (data) => {
     const issueHtml = `<div> 
     <h2> ${data.name}</h2>
@@ -80,7 +81,7 @@ $(document).ready(() => {
     getDiagnosis = (selectedSymptomsId) => {
       // const selectedSymptomsId = $('input[type=radio]:checked').val();
       $.get(`/api/diagnosis/${selectedSymptomsId}`).then((data) => {
-        
+
         if (data.diagnostics) {
           currentSymptomId = data.symptomId;
 
@@ -89,7 +90,7 @@ $(document).ready(() => {
           $('#diagnosisBtn').addClass('d-none');
           buildHtm(data.diagnostics);
 
-        $('.modal-content').css('width', '');
+          $('.modal-content').css('width', '');
           dialog.modal('show');
           modalTitle.html(`<div>Select a Diagnosis</div>`);
 
@@ -147,4 +148,8 @@ $(document).ready(() => {
 
   });
 
+  $("#home").on("click", () => {
+    $("#appBody").load("./landingPage.html");
+
+  })
 });

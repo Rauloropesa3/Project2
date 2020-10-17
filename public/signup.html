@@ -1,76 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>Passport Authentication</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="stylesheets/style.css" rel="stylesheet">
-</head>
-
-<body>
+<div style="background: #d0c6c6;">
   <a href="index.html">
-    <img src="./assets/howlingdoglogo.png" class = "logo"></img>
-  </a>
-
-
-
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-      </div>
-    </div>
-  </nav>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 col-md-offset-3">
-        <h2>Sign Up Form</h2>
-        <form class="signup">
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="email-input" placeholder="Email" required>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="password-input" placeholder="Password" required>
-          </div>
-          <div class="form-group">
-            <label for="exampleInputName1">First Name</label>
-            <input class="form-control" type="text" placeholder="First Name" id="firstName-input" required>
-          </div>
-          <div class="form-group">
-            <label for="exampleLastName1">Last Name</label>
-            <input class="form-control" type="text" placeholder="Last Name" id="lastName-input" required>
-          </div>
-          <div class="form-group">
-            <h5>Gender</h5>
-            <input type="radio" id="male" name="gender" value="male">
-            <label for="male">Male</label><br>
-            <input type="radio" id="female" name="gender" value="female">
-            <label for="female">Female</label><br>
-          </div>
-          <div class="form-group">
-            <label for="birthYear">Birthyear</label>
-            <input class="form-control" type="number" name="birthyear" id="birthyear-input" min="1900" max="2020" required>
-          </div>
-
-
-          <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span> <span class="msg"></span>
-          </div>
-          <button type="submit" class="btn btn-default">Sign Up</button>
-        </form>
-        <br />
-        <p>Or log in <a href="/login">here</a></p>
+      <img src="./assets/howlingdoglogo.png" class = "logo"></img>
+    </a>
+    <div class="container" style="padding-left: 200px; margin-top: -87px;">
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <h2>Sign Up Form</h2>
+          <form class="signup">
+            <div class="form-group">
+              <label for="exampleInputEmail1">Email address</label>
+              <input type="email" class="form-control  form-control-sm" id="email-input" placeholder="Email" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputPassword1">Password</label>
+              <input type="password" class="form-control  form-control-sm" id="password-input" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleInputName1">First Name</label>
+              <input class="form-control  form-control-sm" type="text" placeholder="First Name" id="firstName-input" required>
+            </div>
+            <div class="form-group">
+              <label for="exampleLastName1">Last Name</label>
+              <input class="form-control  form-control-sm" type="text" placeholder="Last Name" id="lastName-input" required>
+            </div>
+            <div class="form-group">
+              <h5>Gender</h5>
+              <input type="radio" id="male" name="gender" value="male">
+              <label for="male">Male</label>
+              <input type="radio" id="female" name="gender" value="female">
+              <label for="female">Female</label>
+            </div>
+            <div class="form-group">
+              <label for="birthYear">Birthyear</label>
+              <input class="form-control  form-control-sm" type="number" name="birthyear" id="birthyear-input" min="1900" max="2020" required>
+            </div>
+  
+  
+            <div style="display: none" id="alert" class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <span class="sr-only">Error:</span> <span class="msg"></span>
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Sign Up</button>
+          </form>
+          Or log in <a href="/login">here</a>
+        </div>
       </div>
     </div>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script type="text/javascript" src="js/signup.js"></script>
-
-</body>
-
-</html>

@@ -29,11 +29,13 @@ $(document).ready(() => {
       password: password
     })
       .then(() => {
-        window.location.replace("/index");
+    $("#appBody").load("./landingPage.html");
+    // window.location.replace("/index");
         // If there's an error, log the error
       })
       .catch(err => {
         console.log(err);
+        
       });
   }
 });

@@ -4,28 +4,28 @@ const db = require("../models");
 const passport = require("../config/passport");
 const medicApi = require("../medicApi");
 
-module.exports = function(app) {
-  const getIssueObject = (issueId, symptomId, res)=>{
+module.exports = function (app) {
+  const getIssueObject = (issueId, symptomId, res) => {
     // call medicApi to get issues with "issueId"
-    
-    medicApi(`issues/${issueId}/info`,"",(data)=>{
+
+    medicApi(`issues/${issueId}/info`, "", (data) => {
       console.log(data);
-      
-      const issueObj= {
-        name:data.Name ,
+
+      const issueObj = {
+        name: data.Name,
         description: data.DescriptionShort,
         treatment: data.TreatmentDescription
-        
+
       }
-      medicApi("redflag",`symptomId=${symptomId}`, (redFlag)=>{
-        issueObj.redFlag =redFlag;
-        res.send({issueObj});
+      medicApi("redflag", `symptomId=${symptomId}`, (redFlag) => {
+        issueObj.redFlag = redFlag;
+        res.send({ issueObj });
 
       })
 
     })
     const redFlag = "redFLag descriptions"; // Use the symptom id to to call medicApi to get the "redFlag" description 
-
+  }
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
@@ -33,7 +33,10 @@ module.exports = function(app) {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       firstName: req.user.firstName,
-      id: req.user.id
+      id: req.user.id,
+      gender: req.user.gender,
+      birthYear: req.user.birthYear,
+      pastDiagnosis: req.user.pastDiagnosis
     });
   });
 
@@ -51,10 +54,13 @@ module.exports = function(app) {
       birthYear: req.body.birthYear
     })
       .then(() => {
-        res.redirect(307, "/api/login");
+        // res.redirect(307, "/api/login");
+        res.json({ created: true })
       })
       .catch(err => {
-        res.status(401).json(err);
+        // res.status(401).json(err);
+        res.json({ created: false })
+
       });
   });
 
@@ -74,48 +80,51 @@ module.exports = function(app) {
       // Sending back a password, even a hashed password, isn't a good idea
       res.json({
         firstName: req.user.firstName,
-        id: req.user.id
+        id: req.user.id,
+        gender: req.user.gender,
+        birthYear: req.user.birthYear,
+        pastDiagnosis: req.user.pastDiagnosis
       });
     }
   });
 
-  app.get("/api/pastInjuries", (req, res)=>{
+  app.get("/api/pastInjuries", (req, res) => {
     const userEmail = "chukwuanumba@gmail.com"; // Will come from user info 
-    db.User.findOne({where:{email: userEmail}}).then((data)=>{
-      
+    db.User.findOne({ where: { email: userEmail } }).then((data) => {
+
       res.send(JSON.parse(data.pastDiagnosis));
     });
 
-    
+
   });
 
-  app.get("/api/symptoms/:subBodyId", (req, res)=>{
+  app.get("/api/symptoms/:subBodyId", (req, res) => {
     const subBodyId = req.params.subBodyId;
     const gender = "M"; // Gender will come from user info 
 
     db.symptoms.findAll({
-      where:{gender: gender,sub_body_id: subBodyId }
+      where: { gender: gender, sub_body_id: subBodyId }
     }).then((sympResults) => {
       res.json(sympResults);
     });
-  }); 
+  });
 
-  app.get("/api/diagnosis/:symptomId", (req, res)=>{
+  app.get("/api/diagnosis/:symptomId", (req, res) => {
     const symptomId = req.params.symptomId;
-    medicApi("diagnosis",`symptoms=[${symptomId}]&gender=male&year_of_birth=1988`,(data)=>{
-      
-      if (data.length === 1){
-        getIssueObject (data[0].issueId, symptomId,res);
-        
-      }else{
+    medicApi("diagnosis", `symptoms=[${symptomId}]&gender=male&year_of_birth=1988`, (data) => {
+
+      if (data.length === 1) {
+        getIssueObject(data[0].issueId, symptomId, res);
+
+      } else {
         //There are multiple diagnostics so send diagnostics for the user to choose 1 
-        const diagnostics = data.map((item,index)=>{
-      return {
-              name:item.Issue.Name,
-              issueId:item.Issue.ID
-            }
+        const diagnostics = data.map((item, index) => {
+          return {
+            name: item.Issue.Name,
+            issueId: item.Issue.ID
+          }
         })
-        res.send({diagnostics, symptomId})
+        res.send({ diagnostics, symptomId })
       }
     });
 
@@ -131,13 +140,13 @@ module.exports = function(app) {
     //   res.send({diagnostics, symptomId})
 
     // }
-    
+
   });
 
-  app.get("/api/issues/:issueId/:symptomId", (req,res)=>{
+  app.get("/api/issues/:issueId/:symptomId", (req, res) => {
     console.log("description and treatment");
-    const issueId =req.params.issueId;
-    const symptomId =req.params.symptomId;
-     getIssueObject (issueId, symptomId,res);
+    const issueId = req.params.issueId;
+    const symptomId = req.params.symptomId;
+    getIssueObject(issueId, symptomId, res);
   })
 };

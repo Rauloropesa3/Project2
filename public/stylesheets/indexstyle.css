@@ -32,18 +32,19 @@ body{
 .logo{
     height: 100px;
     width: 100px;
+    cursor: pointer;
 }
 
 .username{
-    color: blue;
-    float: left;
+    color: #07eaf7;
+    float: right;
     margin-left: 25px
 }
 
 .injuries{
-    color: blue;
-    float: left;
-    margin-left: 500px
+    color: #07eaf7;
+    /* float: left; */
+    /* margin-left: 500px */
 }
 
 #symptoms{
