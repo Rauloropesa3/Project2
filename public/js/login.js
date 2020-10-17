@@ -34,8 +34,13 @@ $(document).ready(() => {
         // If there's an error, log the error
       })
       .catch(err => {
-        console.log(err);
-        
+        // console.log(err);
+        alert("Wrong email or password. Please Try again")
       });
   }
+  $("#signup").on("click", ()=>{
+    $("#appBody").load("./signup.html");
+
+
+  })
 });

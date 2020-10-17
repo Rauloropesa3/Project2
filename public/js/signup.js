@@ -58,7 +58,9 @@ $(document).ready(() => {
       birthYear: birthYear
     })
       .then(() => {
-        window.location.replace("/index");
+        // window.location.replace("/index");
+    $("#appBody").load("./login.html");
+
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);

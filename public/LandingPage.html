@@ -18,6 +18,7 @@
 </div>
 
 <script>
+    $(document).ready(() => {
     $("#injurySelection").on("click", (event) => {
         event.preventDefault()
         $("#appBody").load("./bodyPartCarousel.html");
@@ -34,4 +35,5 @@
         });
         $(".pastHistory").html(pastHistoryLi);
     });
+})
 </script>
