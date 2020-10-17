@@ -31,7 +31,10 @@ $(document).ready(() => {
       .then((data) => {
         console.log(data);
 
-        $("#appBody").load("./landingPage.html");
+        setTimeout(()=>{
+          $("#appBody").load("./landingPage.html");
+
+        }, 1000)
         // window.location.replace("/index");
         // If there's an error, log the error
       })
