@@ -31,11 +31,11 @@ $(document).ready(() => {
       .then((data) => {
         console.log(data);
 
-        setTimeout(()=>{
-          $("#appBody").load("./landingPage.html");
+        // setTimeout(()=>{
+        //   $("#appBody").load("./landingPage.html");
 
-        }, 1000)
-        // window.location.replace("/index");
+        // }, 1000)
+        window.location.replace("/LandingPage");
         // If there's an error, log the error
       })
       .catch(err => {
