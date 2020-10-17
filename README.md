@@ -46,6 +46,6 @@
   
   ## Demonstration
   [Click here](https://murmuring-shore-74149.herokuapp.com/) to be directed to the application.
-  ![](public/assets/img/daBurgerHome.png)
+  ![](public/assets/medicBud.png)
 
   
