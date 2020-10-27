@@ -28,14 +28,16 @@ $(document).ready(() => {
       email: email,
       password: password
     })
-      .then(() => {
-    $("#appBody").load("./landingPage.html");
-    // window.location.replace("/index");
-        // If there's an error, log the error
+      .then((data) => {
+        $("#appBody").load("./home-page.html");
       })
       .catch(err => {
         console.log(err);
-        
+        alert("Wrong email or password. Please Try again")
       });
   }
+  $("#signup").on("click", (event) => {
+    event.preventDefault()
+    $("#appBody").load("./signup.html");
+  })
 });

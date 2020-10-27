@@ -5,6 +5,33 @@ const passport = require("../config/passport");
 const medicApi = require("../medicApi");
 
 module.exports = function (app) {
+  let userInfo = {};
+
+  const savePastDiagnosis = (symptomId)=>{
+    db.symptoms.findOne({ where: { symptom_id: symptomId } }).then((data) => {
+      // console.log(data.symptom_name, pastDiagnosis);
+
+      const symptomName = data.symptom_name;
+      const pastDiagnosis = userInfo.pastDiagnosis
+      if (!pastDiagnosis){
+        pastDiagnosis = "[]";
+      }
+      const arrayDiagnosis = JSON.parse(pastDiagnosis);
+      arrayDiagnosis.push(symptomName);
+  
+      db.User.update({
+       pastDiagnosis:JSON.stringify(arrayDiagnosis)
+      }, {
+        where: {
+          email: userInfo.email
+        }
+      }).then(function(data) {
+        // res.json(data);
+        console.log(data);
+        
+      });
+    });
+  }
   const getIssueObject = (issueId, symptomId, res) => {
     // call medicApi to get issues with "issueId"
 
@@ -78,13 +105,16 @@ module.exports = function (app) {
     } else {
       // Otherwise send back the user's email and id
       // Sending back a password, even a hashed password, isn't a good idea
-      res.json({
+       
+       userInfo = {
         firstName: req.user.firstName,
         id: req.user.id,
         gender: req.user.gender,
         birthYear: req.user.birthYear,
-        pastDiagnosis: req.user.pastDiagnosis
-      });
+        pastDiagnosis: req.user.pastDiagnosis || "[]",
+        email:req.user.email
+      };
+      res.json(userInfo);
     }
   });
 
@@ -111,7 +141,9 @@ module.exports = function (app) {
 
   app.get("/api/diagnosis/:symptomId", (req, res) => {
     const symptomId = req.params.symptomId;
-    medicApi("diagnosis", `symptoms=[${symptomId}]&gender=male&year_of_birth=1988`, (data) => {
+    savePastDiagnosis(symptomId);
+    medicApi("diagnosis", `symptoms=[${symptomId}]&gender=male&year_of_birth=1988`, 
+      (data) => {
 
       if (data.length === 1) {
         getIssueObject(data[0].issueId, symptomId, res);
@@ -128,18 +160,6 @@ module.exports = function (app) {
       }
     });
 
-    // const diagnostics = [ // Call medicApi with "symptomId" to get a list a diagnosis                  
-    //   { name: "diagnosis1",issueId:157},
-    //   // { name: "diagnosis2",issueId:222},
-    //   // { name: "diagnosis3",issueId:420},
-    // ];
-    // if (diagnostics.length === 1){
-    //     const issueObj = getIssueObject (diagnostics[0].issueId, symptomId);
-    //    res.send({issueObj});
-    // }else{
-    //   res.send({diagnostics, symptomId})
-
-    // }
 
   });
 

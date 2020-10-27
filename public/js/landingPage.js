@@ -1,23 +1,4 @@
-<img src="./assets/howlingdoglogo.png" class="logo"></img>
-
-
-<h1 class="tagline">Professional Sports Medicine At Your Fingertips</h1>
-
-<div class="col text-center">
-    <button id="injurySelection" class="btn btn-primary btn-lg " role="button" aria-pressed="true">
-        Click to start<br> New Injury
-    </button>
-</div>
-
-
-<div>
-    <h1 class="injuries">
-        Your Past Injuries
-    </h1>
-    <ul class="pastHistory"></ul>
-</div>
-
-<script>
+$(document).ready(() => {
     $("#injurySelection").on("click", (event) => {
         event.preventDefault()
         $("#appBody").load("./bodyPartCarousel.html");
@@ -25,7 +6,7 @@
     $.get("/api/user_data").then(data => {
         // console.log(data);
         $(".username").text(`Welcome ${data.firstName}`);
-        
+
         const pastDiagnosis = JSON.parse(data.pastDiagnosis);
         let pastHistoryLi = "";
 
@@ -34,4 +15,8 @@
         });
         $(".pastHistory").html(pastHistoryLi);
     });
-</script>
+    $("#therapyPage").on("click", (event)=>{
+        event.preventDefault();
+        $("#appBody").load("./therapy.html")
+    })
+})

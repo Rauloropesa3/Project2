@@ -37,4 +37,19 @@ module.exports = function(app) {
 
     res.sendFile(path.join(__dirname, "../public/symptoms.html"));
   });
+  app.get("/home-page", (req, res) => {
+    // If the user already has an account send them to the members page
+
+    res.sendFile(path.join(__dirname, "../public/home-page.html"));
+  });
+  app.get("/bodyPartCarousel", (req, res) => {
+    // If the user already has an account send them to the members page
+
+    res.sendFile(path.join(__dirname, "../public/bodyPartCarousel.html"));
+  });
+  app.get("/therapy", (req, res) => {
+    // If the user already has an account send them to the members page
+
+    res.sendFile(path.join(__dirname, "../public/therapy.html"));
+  });
 };
