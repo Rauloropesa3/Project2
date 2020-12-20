@@ -19,6 +19,10 @@
   -[Tests](#tests)
 
   -[Questions](#questions)
+  
+  -[Demonstration](#demonstration)
+  
+  -[Credit](#credit)
 
   ## Installation
 
