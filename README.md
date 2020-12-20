@@ -42,7 +42,7 @@
 
   ## Questions
 
-  If you have any questions about the repo, open an issue or contact me directly at egomezfax19@gmail.com. You can find more of my work at [www.github.com/egome019](https://github.com/egome019)
+  If you have any questions about the repo, open an issue or contact us directly at egomezfax19@gmail.com, Chukwuanumba@gmail.com, alexoropesa1982@gmail.com, or michael.shepard8@gmail.com.
   
   ## Demonstration
   [Click here](https://murmuring-shore-74149.herokuapp.com/) to be directed to the application.
@@ -50,13 +50,13 @@
 
   ## Credit
   
-  - Michael Shepard
+  - [Raul Oropesa](https://github.com/Rauloropesa3)
   
-  - Ralph Anumba
+  - [Ralph Anumba](https://github.com/Ranumba89)
   
-  - Raul Oropresa
+  - [Michael Shepard](https://github.com/mbshepard)
   
-  - Erik Gomez
+  - [Erik Gomez](https://github.com/egome019)
   
   
   
